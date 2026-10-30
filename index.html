@@ -127,6 +127,17 @@ const DATA=[
 {id:'d9',judul:'Senyum & Tebar Salam',arab:`تَبَسُّمُكَ فِي وَجْهِ أَخِيكَ صَدَقَةٌ`,trans:'Tabassumuka fi wajhi akhika shadaqah',arti:'Senyum adalah sedekah, tebar salam tumbuhkan cinta.',waktu:'Siang',tema:'Akhlak & Sosial',sumber:'Tirmidzi 1956',kitab:'Tirmidzi 1956 Hasan Shahih, Muslim 54, Riyadush Shalihin 693',dalil:''}
 ];
 
+function speakArabic(text){
+  if(!('speechSynthesis' in window)){ alert('Browser tidak support TTS'); return; }
+  speechSynthesis.cancel();
+  const clean = text.replace(/\n/g, ' ، ');
+  const u = new SpeechSynthesisUtterance(clean.slice(0,800));
+  u.lang='ar-SA'; u.rate=0.8;
+  const voices = speechSynthesis.getVoices();
+  const arVoice = voices.find(v=>v.lang && v.lang.toLowerCase().includes('ar')) || voices.find(v=>v.name.toLowerCase().includes('arab')) || voices[0];
+  if(arVoice) u.voice=arVoice;
+  speechSynthesis.speak(u);
+}
 const W=['Semua','Pagi','Siang','Sore','Malam','Sepanjang Waktu','Anytime'];
 const T=['Semua','Dzikir & Hati','Akhlak & Sosial','Amalan Disegerakan','Perlindungan','Fiqih Ibadah Ringan'];
 let fw='Semua', ft='Semua', q='';
@@ -166,8 +177,16 @@ window.openId=id=>{
     <p style="color:#1a5c3a;font-style:italic;margin:8px 0">${a.trans}</p>
     <p style="font-size:15px;line-height:1.7">${a.arti}</p>
     <div class="audioBox">
-      <button onclick="let au=document.getElementById('aud');if(au.paused){au.play();this.textContent='⏸'}else{au.pause();this.textContent='▶'}">▶</button>
-      <div style="flex:1"><b style="font-size:13px">${a.judul} - Audio</b><br><small style="color:var(--ink2)">Placeholder • Ganti file di /audio/${a.id}.mp3</small><br><audio id="aud" controls style="width:100%;height:30px;margin-top:6px"><source src="audio/${a.id}.mp3" type="audio/mpeg"></audio></div>
+      <button id="btnPlay" onclick="let au=document.getElementById('aud'); if(au && au.src && au.readyState>0){ if(au.paused){au.play(); this.textContent='⏸'}else{au.pause(); this.textContent='▶'} } else { speakArabic(a.arab) }">▶</button>
+      <div style="flex:1">
+        <b style="font-size:13px">${a.judul} - Audio</b><br>
+        <small style="color:var(--ink2)">🔊 Klik ▶ untuk TTS Arab, atau putar file di /audio/${a.id}.mp3 jika ada</small><br>
+        <audio id="aud" controls style="width:100%;height:32px;margin-top:6px"><source src="audio/${a.id}.mp3" type="audio/mpeg"></audio>
+        <div style="display:flex;gap:6px;margin-top:6px">
+          <button class="btn ghost" style="flex:1;font-size:11px" onclick="speakArabic(a.arab)">🔊 Baca Arab (TTS Browser)</button>
+          <button class="btn ghost" style="flex:1;font-size:11px" onclick="speechSynthesis.cancel()">⏹ Stop</button>
+        </div>
+      </div>
     </div>
     <div class="dalilBox">
       <b style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)">Dalil & Sumber Kitab Mendalam</b>
