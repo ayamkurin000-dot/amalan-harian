@@ -1,26 +1,21 @@
-# Folder Audio - NurHarian
 
-Saat ini audio masih kosong, tapi web sudah bisa bunyi pakai TTS Browser!
+# Audio NurHarian - Sudah ada placeholder + TTS
 
-## Cara Kerja Baru (Opsi 2 yang kamu pilih):
-1. Klik card amalan → modal terbuka
-2. Klik tombol 🔊 Baca Arab (TTS Browser) → browser akan membacakan teks Arab langsung pakai suara
-3. Tidak perlu file mp3, sudah jalan di HP & Laptop
+## Status Sekarang:
+- File mp3 placeholder sudah ada (1 detik silent) biar player tidak error 404
+- Web sudah bisa bunyi pakai TTS browser (tombol 🔊 Baca Arab)
 
-## Jika ingin tambah file MP3 asli:
-Taruh file dengan nama:
-- k7.mp3 = 7 Kalimat Mulia
-- k5.mp3 = 5 Perkara Tergesa
-- d1.mp3 = Sayyidul Istighfar
-- d2.mp3 = Ayat Kursi
-- dst
+## Untuk Audio Asli (Opsi 2):
+Jalankan di laptop kamu:
 
-Rekomendasi sumber audio gratis halal:
-- https://everyayah.com - Audio Quran (Mishary, dll)
-- https://www.ttsmp3.com - Generate TTS Arab gratis (pilih Voice: Salma - Arabic)
-- https://elevenlabs.io - TTS kualitas tinggi
+```bash
+pip install gTTS requests
+python download_real_audio.py
+```
 
-Setelah upload mp3, player otomatis akan pakai mp3, bukan TTS lagi.
+Atau download manual:
+- Ayat Kursi: https://everyayah.com/data/Alafasy_128kbps/002255.mp3 -> rename jadi d2.mp3
+- Al-Mulk: https://everyayah.com/data/Alafasy_128kbps/067001.mp3 -> d6.mp3
+- 7 Kalimat & 5 Tergesa: generate di https://ttsmp3.com (pilih Arabic - Salma, paste teks Arab)
 
-## Update index.html:
-File index.html di repo ini sudah di-patch dengan fitur TTS, tinggal push ulang.
+Lalu upload semua mp3 ke folder audio/ di repo https://github.com/ayamkurin000-dot/amalan-harian

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a5c3a">
+<title>NurHarian — Amalan Harian Ringan Berat Timbangan</title>
+<meta name="description" content="Kumpulan amalan harian ringan tapi berat timbangan - 7 Kalimat Mulia, 5 Perkara Boleh Tergesa, Dzikir Pagi Petang">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f1e8;--paper:#fffdf7;--ink:#2b2114;--ink2:#7a6a55;--accent:#b8962e;--accent2:#1a5c3a;--soft:#e8e0d0;--bari:#fff4d8}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+.topbar{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,#2d2416 0%,#5a4318 100%);color:var(--bari);padding:calc(10px + env(safe-area-inset-top)) 16px 12px;display:flex;align-items:center;gap:12px;border-bottom:2px solid var(--accent)}
+.topbar b{font-size:18px}
+.topbar small{display:block;font-size:11px;opacity:.8}
+.hero{max-width:1100px;margin:0 auto;padding:28px 16px 12px}
+.hero h1{font-size:32px;line-height:1.2;margin:0;color:var(--ink)}
+.hero h1 span{color:var(--accent2)}
+.hero p{color:var(--ink2);max-width:640px}
+.filters{max-width:1100px;margin:0 auto;padding:0 16px 12px;position:sticky;top:62px;z-index:15;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--soft)}
+.chip{display:inline-block;margin:4px 4px 4px 0;padding:6px 14px;border-radius:99px;border:1px solid var(--soft);background:var(--paper);font-size:13px;font-weight:600;color:var(--ink2);cursor:pointer;user-select:none}
+.chip.on{background:var(--accent2);color:var(--paper);border-color:var(--accent2)}
+.chip.alt.on{background:var(--accent);color:var(--ink);border-color:var(--accent)}
+.grid{max-width:1100px;margin:0 auto;padding:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.card{background:var(--paper);border-radius:16px;padding:16px;box-shadow:0 1px 0 var(--soft),0 4px 16px rgba(60,40,10,.06);border:1px solid var(--soft);cursor:pointer;transition:.15s}
+.card:active{transform:scale(.98)}
+.card h4{margin:0;font-size:16px;color:var(--accent2)}
+.card .tr{font-size:13px;color:var(--ink2);margin:4px 0 8px}
+.card .arab{font-family:'Amiri','Scheherazade New',serif;direction:rtl;text-align:right;font-size:22px;line-height:1.9;color:var(--ink)}
+.badge{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:99px;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent2);margin-right:4px}
+.badge.green{background:color-mix(in srgb,var(--accent2) 14%,transparent);color:var(--accent2)}
+.src{font-size:11px;color:var(--ink2);margin-top:8px;line-height:1.4}
+.featured{max-width:1100px;margin:0 auto;padding:0 16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.featured{grid-template-columns:1fr}}
+.feat{background:var(--paper);border-radius:16px;padding:16px;border:1.5px solid var(--accent);box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.feat.green{border-color:var(--accent2)}
+.modal{position:fixed;inset:0;z-index:80;display:none}
+.modal.open{display:flex;align-items:flex-end;justify-content:center}
+@media(min-width:700px){.modal.open{align-items:center}}
+.modal-bg{position:absolute;inset:0;background:rgba(20,15,5,.55);backdrop-filter:blur(6px)}
+.modal-box{position:relative;z-index:1;width:100%;max-width:600px;max-height:90vh;background:var(--paper);border-radius:18px 18px 0 0;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 -10px 40px rgba(0,0,0,.4)}
+@media(min-width:700px){.modal-box{border-radius:18px;margin:16px}}
+.modal-head{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--soft)}
+.modal-body{overflow:auto;padding:18px 20px 26px}
+.bigArab{font-family:'Amiri','Scheherazade New',serif;direction:rtl;text-align:right;font-size:30px;line-height:2.2;color:var(--ink)}
+.dalilBox{margin:14px 0;padding:12px;border-radius:12px;background:color-mix(in srgb,var(--accent) 8%,transparent);border:1px solid var(--soft)}
+.audioBox{margin:14px 0;padding:12px;border-radius:12px;background:var(--bg);border:1px solid var(--soft);display:flex;align-items:center;gap:12px}
+.audioBox button{width:44px;height:44px;border-radius:50%;border:0;background:var(--accent2);color:var(--paper);display:grid;place-items:center;font-size:18px;cursor:pointer}
+.btn{padding:8px 14px;border-radius:99px;border:1px solid var(--soft);font-weight:700;font-size:13px;cursor:pointer}
+.btn.primary{background:var(--accent2);color:var(--paper);border-color:var(--accent2)}
+.btn.ghost{background:transparent;color:var(--accent2)}
+footer{max-width:1100px;margin:40px auto 0;padding:20px 16px;color:var(--ink2);font-size:12px;text-align:center}
+.search{width:100%;padding:10px 14px;border-radius:99px;border:1px solid var(--soft);background:var(--paper);color:var(--ink);font-size:14px;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div style="width:36px;height:36px;border-radius:10px;background:var(--bari);color:#3a2a0c;display:grid;place-items:center;font-weight:800">ن</div>
+  <div style="flex:1"><b>NurHarian</b><small>Amalan Harian Ringan • 7 Kalimat & 5 Tergesa</small></div>
+  <div style="font-size:11px;opacity:.8">Kemenag Style</div>
+</div>
+
+<div class="hero">
+  <h1>Amalan Harian <span>Ringan</span> Tapi Berat Timbangan</h1>
+  <p>Kumpulan dzikir, doa, dan adab harian yang bersumber dari kitab muktabar: Tanbihul Ghafilin, Hilyatul Auliya, Al-Adzkar, Shahih Bukhari Muslim. Dikelompokkan berdasarkan waktu dan tema agar mudah diamalkan.</p>
+</div>
+
+<div class="featured">
+  <div class="feat" onclick="openId('k7')" style="cursor:pointer">
+    <div style="display:flex;justify-content:space-between"><b>⭐ 7 Kalimat Mulia</b><span class="badge">Featured</span></div>
+    <small style="color:var(--ink2)">Abu Laits As-Samarqandi - Tanbihul Ghafilin Hal.35-36</small>
+    <div class="arab" style="font-size:18px;margin-top:8px">بِسْمِ اللَّهِ - اَلْحَمْدُ لِلَّهِ - أَسْتَغْفِرُ اللَّهَ - إِنْ شَاءَ اللَّهُ - لَا حَوْلَ ...</div>
+  </div>
+  <div class="feat green" onclick="openId('k5')" style="cursor:pointer">
+    <div style="display:flex;justify-content:space-between"><b>⏰ 5 Perkara Boleh Tergesa</b><span class="badge green">Sunnah</span></div>
+    <small style="color:var(--ink2)">Hatim Al-Asham - Hilyatul Auliya Juz 8 Hal.78</small>
+    <div class="arab" style="font-size:17px;margin-top:8px">إِطْعَامُ الضَّيْفِ - تَجْهِيزُ الْمَيِّتِ - تَزْوِيجُ الْبِكْرِ ...</div>
+  </div>
+</div>
+
+<div class="filters">
+  <div><small style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)">Waktu</small><div id="fWaktu"></div></div>
+  <div style="margin-top:8px"><small style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)">Tema</small><div id="fTema"></div></div>
+  <input id="q" class="search" placeholder="Cari: bismillah, taubat, sedekah, dhuha...">
+</div>
+
+<div id="grid" class="grid"></div>
+
+<div id="modal" class="modal">
+  <div class="modal-bg" onclick="closeModal()"></div>
+  <div class="modal-box">
+    <div class="modal-head"><b id="mTitle" style="flex:1">Detail</b><button class="btn ghost" onclick="closeModal()">✕ Tutup</button></div>
+    <div id="mBody" class="modal-body"></div>
+  </div>
+</div>
+
+<footer>
+  Disusun dari: Tanbihul Ghafilin, Hilyatul Auliya, Al-Adzkar An-Nawawiyah, Riyadush Shalihin, Shahih Bukhari Muslim, Ihya Ulumuddin<br>
+  Proyek: Mannixs-21 • Font: LPMQ Isep Misbah (Kemenag) + Amiri Quran • Offline Ready
+</footer>
+
+<script>
+const DATA=[
+{id:'k7',judul:'7 Kalimat Mulia',arab:`بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+اَلْحَمْدُ لِلَّهِ
+أَسْتَغْفِرُ اللَّهَ
+إِنْ شَاءَ اللَّهُ
+لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ
+إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ
+لَا إِلَهَ إِلَّا اللَّهُ مُحَمَّدٌ رَسُولُ اللَّهِ`,trans:'Bismillah, Alhamdulillah, Astaghfirullah, InsyaAllah, La haula, Inna lillahi, La ilaha illallah',arti:'Siapa menjaga 7 kalimat ini maka mulia di sisi Allah & Malaikat, diampuni dosa walau sebanyak buih di lautan, merasakan manisnya taat.',waktu:'Sepanjang Waktu',tema:'Dzikir & Hati',sumber:'Tanbihul Ghafilin Hal.35-36',kitab:'Kitab Tanbihul Ghafilin bi Ahaditsi Sayyidil Anbiya - Abu Laits Nashr bin Muhammad As-Samarqandi W.373H, Bab Fadhlud Dzikr, Hal.35-36 Cet. Darul Kutub Al-Ilmiyah Beirut. Dikutip juga Hilyatul Auliya Juz 8 Hal.78 & Nashaihul Ibad',dalil:'مَنْ حَفِظَ سَبْعَ كَلِمَاتٍ فَهُوَ شَرِيفٌ عِنْدَ اللَّهِ وَالْمَلَائِكَةِ - Qaul Abu Laits, makna shahih dari hadits dzikir mutawatir'},
+{id:'k5',judul:'5 Perkara Boleh Tergesa',arab:`إِطْعَامُ الضَّيْفِ إِذَا نَزَلَ
+تَجْهِيزُ الْمَيِّتِ إِذَا مَاتَ
+تَزْوِيجُ الْبِكْرِ إِذَا أَدْرَكَتْ
+قَضَاءُ الدَّيْنِ إِذَا وَجَبَ
+التَّوْبَةُ مِنَ الذَّنْبِ إِذَا أَذْنَبَ`,trans:'Ith`amudh dhaif, Tajhizul mayyit, Tazwijul bikr, Qadha`ud dain, Taubah',arti:'Tergesa-gesa dari syaitan kecuali 5 perkara ini justru sunnah disegerakan.',waktu:'Anytime',tema:'Amalan Disegerakan',sumber:'Hilyatul Auliya Juz 8 Hal.78',kitab:'Hilyatul Auliya wa Thabaqatul Ashfiya - Abu Nu`aim Al-Ashfahani Juz 8 Hal.78, Atsar Hatim Al-Asham. Juga Tanbihul Ghafilin Hal.35, Ihya Ulumuddin Juz 3 Hal.251, Hadits induk Tirmidzi No.2012: At-Ta`anni minallah wal `ajalatu minasy syaithan',dalil:'كَانَ يُقَالُ الْعَجَلَةُ مِنَ الشَّيْطَانِ إِلَّا فِي خَمْسٍ'},
+{id:'d1',judul:'Sayyidul Istighfar',arab:`اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ...`,trans:'Allahumma anta rabbi',arti:'Pemimpin istighfar, siapa baca pagi yakin lalu mati hari itu masuk surga.',waktu:'Pagi',tema:'Dzikir & Hati',sumber:'Bukhari 6306',kitab:'Shahih Bukhari Kitab Da`awat Bab Afdhalul Istighfar No.6306, Riyadush Shalihin 1875, Al-Adzkar Hal.100',dalil:'سَيِّدُ الِاسْتِغْفَارِ'},
+{id:'d2',judul:'Ayat Kursi & 3 Qul',arab:`اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ...`,trans:'Allahu la ilaha illa huwa',arti:'Dijaga dari jin & sihir sampai sore/pagi.',waktu:'Pagi',tema:'Perlindungan',sumber:'Abu Dawud 5082',kitab:'Al-Adzkar Hal.74-76, Abu Dawud 5082 Hasan Shahih, Hisnul Muslim Hal.27',dalil:'آيَةُ الْكُرْسِيِّ'},
+{id:'d3',judul:'Tahlil 100x',arab:`لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ...`,trans:'La ilaha illallah wahdahu...',arti:'Seperti bebaskan 10 budak, 100 kebaikan, 100 keburukan dihapus.',waktu:'Pagi',tema:'Dzikir & Hati',sumber:'Bukhari 3293',kitab:'Bukhari 3293 Muslim 2691 Al-Adzkar Hal.90',dalil:'مَنْ قَالَ لَا إِلَهَ إِلَّا اللَّهُ...'},
+{id:'d4',judul:'Subhanallah wa Bihamdihi 100x',arab:`سُبْحَانَ اللَّهِ وَبِحَمْدِهِ`,trans:'Subhanallahi wa bihamdihi',arti:'Diampuni dosa walau sebanyak buih lautan.',waktu:'Sore',tema:'Dzikir & Hati',sumber:'Bukhari 6405',kitab:'Bukhari 6405 Muslim 2691',dalil:''},
+{id:'d5',judul:'Shalat Dhuha 2 Rakaat',arab:`صَلَاةُ الضُّحَى`,trans:'Shalat Dhuha',arti:'Mencukupi sedekah 360 persendian tubuh.',waktu:'Pagi',tema:'Fiqih Ibadah Ringan',sumber:'Muslim 720',kitab:'Muslim 720, Fathul Mu`in Hal.32',dalil:''},
+{id:'d6',judul:'Surah Al-Mulk',arab:`تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ...`,trans:'Tabarakalladzi biyadihil mulk',arti:'30 ayat penyelamat siksa kubur.',waktu:'Malam',tema:'Perlindungan',sumber:'Tirmidzi 2891',kitab:'Tirmidzi 2891 Hasan, At-Targhib Juz 2 Hal.589',dalil:''},
+{id:'d7',judul:'Witir 1 Rakaat',arab:`أَوْتِرُوا يَا أَهْلَ الْقُرْآنِ`,trans:'Autiru ya ahlal Quran',arti:'Nabi tidak pernah tinggalkan witir.',waktu:'Malam',tema:'Fiqih Ibadah Ringan',sumber:'Bukhari 998',kitab:'Abu Dawud 1416, Bukhari 998',dalil:''},
+{id:'d8',judul:'Sedekah Subuh',arab:`اللَّهُمَّ أَعْطِ مُنْفِقًا خَلَفًا`,trans:'Allahumma a`thi munfiqan khalafa',arti:'Didoakan malaikat setiap pagi.',waktu:'Pagi',tema:'Akhlak & Sosial',sumber:'Bukhari 1442',kitab:'Bukhari 1442 Muslim 1010',dalil:''},
+{id:'d9',judul:'Senyum & Tebar Salam',arab:`تَبَسُّمُكَ فِي وَجْهِ أَخِيكَ صَدَقَةٌ`,trans:'Tabassumuka fi wajhi akhika shadaqah',arti:'Senyum adalah sedekah, tebar salam tumbuhkan cinta.',waktu:'Siang',tema:'Akhlak & Sosial',sumber:'Tirmidzi 1956',kitab:'Tirmidzi 1956 Hasan Shahih, Muslim 54, Riyadush Shalihin 693',dalil:''}
+];
+
+function speakArabic(text){
+  if(!('speechSynthesis' in window)){ alert('Browser tidak support TTS'); return; }
+  speechSynthesis.cancel();
+  const clean = text.replace(/\n/g, ' ، ');
+  const u = new SpeechSynthesisUtterance(clean.slice(0,800));
+  u.lang='ar-SA'; u.rate=0.8;
+  const voices = speechSynthesis.getVoices();
+  const arVoice = voices.find(v=>v.lang && v.lang.toLowerCase().includes('ar')) || voices.find(v=>v.name.toLowerCase().includes('arab')) || voices[0];
+  if(arVoice) u.voice=arVoice;
+  speechSynthesis.speak(u);
+}
+const W=['Semua','Pagi','Siang','Sore','Malam','Sepanjang Waktu','Anytime'];
+const T=['Semua','Dzikir & Hati','Akhlak & Sosial','Amalan Disegerakan','Perlindungan','Fiqih Ibadah Ringan'];
+let fw='Semua', ft='Semua', q='';
+
+function renderChips(){
+  document.getElementById('fWaktu').innerHTML=W.map(w=>`<span class="chip ${fw===w?'on':''}" onclick="setW('${w}')">${w}</span>`).join('');
+  document.getElementById('fTema').innerHTML=T.map(t=>`<span class="chip alt ${ft===t?'on':''}" onclick="setT('${t}')">${t}</span>`).join('');
+}
+window.setW=w=>{fw=w;renderChips();render()}
+window.setT=t=>{ft=t;renderChips();render()}
+
+function render(){
+  const grid=document.getElementById('grid');
+  let list=DATA.filter(a=>{
+    if(fw!=='Semua' && a.waktu!==fw && !(fw==='Sepanjang Waktu' && a.waktu==='Anytime')) return false;
+    if(ft!=='Semua' && a.tema!==ft) return false;
+    if(q){ const s=(a.judul+a.arab+a.trans+a.arti+a.sumber).toLowerCase(); if(!s.includes(q.toLowerCase())) return false; }
+    return true;
+  });
+  grid.innerHTML=list.map(a=>`
+    <div class="card" onclick="openId('${a.id}')">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px"><span class="badge">${a.waktu}</span><span class="badge green">${a.tema}</span></div>
+      <h4>${a.judul}</h4>
+      <div class="tr">${a.arti.slice(0,100)}...</div>
+      <div class="arab">${a.arab.split('\n')[0].slice(0,70)}...</div>
+      <div class="src">📚 ${a.sumber} • ${a.kitab.slice(0,60)}...</div>
+    </div>
+  `).join('') || '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--ink2)">Tidak ada hasil</div>';
+}
+
+window.openId=id=>{
+  const a=DATA.find(x=>x.id===id); if(!a) return;
+  document.getElementById('mTitle').textContent=a.judul;
+  document.getElementById('mBody').innerHTML=`
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"><span class="badge">${a.waktu}</span><span class="badge green">${a.tema}</span><span class="badge">${a.sumber}</span></div>
+    <div class="bigArab">${a.arab.replaceAll('\n','<br>')}</div>
+    <p style="color:#1a5c3a;font-style:italic;margin:8px 0">${a.trans}</p>
+    <p style="font-size:15px;line-height:1.7">${a.arti}</p>
+    <div class="audioBox">
+      <button id="btnPlay" onclick="let au=document.getElementById('aud'); if(au && au.src && au.readyState>0){ if(au.paused){au.play(); this.textContent='⏸'}else{au.pause(); this.textContent='▶'} } else { speakArabic(a.arab) }">▶</button>
+      <div style="flex:1">
+        <b style="font-size:13px">${a.judul} - Audio</b><br>
+        <small style="color:var(--ink2)">🔊 Klik ▶ untuk TTS Arab, atau putar file di /audio/${a.id}.mp3 jika ada</small><br>
+        <audio id="aud" controls style="width:100%;height:32px;margin-top:6px"><source src="audio/${a.id}.mp3" type="audio/mpeg"></audio>
+        <div style="display:flex;gap:6px;margin-top:6px">
+          <button class="btn ghost" style="flex:1;font-size:11px" onclick="speakArabic(a.arab)">🔊 Baca Arab (TTS Browser)</button>
+          <button class="btn ghost" style="flex:1;font-size:11px" onclick="speechSynthesis.cancel()">⏹ Stop</button>
+        </div>
+      </div>
+    </div>
+    <div class="dalilBox">
+      <b style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)">Dalil & Sumber Kitab Mendalam</b>
+      <div class="arab" style="font-size:22px;margin:8px 0">${a.dalil}</div>
+      <p style="font-size:13px;line-height:1.7;background:var(--paper);padding:10px;border-radius:8px;border:1px dashed var(--soft)"><b>📚 ${a.kitab}</b></p>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn ghost" style="flex:1" onclick="navigator.clipboard.writeText(\`${a.arab.replace(/`/g,'')}\`);alert('Teks Arab disalin')">📋 Salin Arab</button>
+      <button class="btn primary" style="flex:1" onclick="if(navigator.share){navigator.share({title:'${a.judul}',text:'${a.arti}'})}else alert('Share tidak didukung')">Bagikan</button>
+    </div>
+  `;
+  document.getElementById('modal').classList.add('open');
+};
+window.closeModal=()=>{document.getElementById('modal').classList.remove('open'); const au=document.getElementById('aud'); if(au) au.pause()};
+
+document.getElementById('q').addEventListener('input',e=>{q=e.target.value;render()});
+
+renderChips(); render();
+</script>
+</body>
+</html>
